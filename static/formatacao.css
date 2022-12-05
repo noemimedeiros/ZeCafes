@@ -1,0 +1,120 @@
+:root{
+    --marrom-700: #573F3A;
+    --marrom-500: #A77D73;
+    --marrom-300: #E9D6CE;
+    --marrom-200: #F9E6DE;
+    --vermelho-900: #926161;
+    --vermelho-500: #F34646;
+    --verde: #61926C;
+    --azul: #8BA2F5;
+}
+
+*{
+    font-family: 'Inter', sans-serif;
+}
+
+.main-coffee {
+    background-color: var(--marrom-700);
+    background-image: url('./images/background-coffee.png');
+    background-size: 90px;
+    background-repeat: repeat;
+    background-position: center;
+}
+
+.foto-usuario{
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    background-size: cover;
+    border: none;
+}
+
+.nav-item{
+    margin-inline: 6%;
+}
+
+.nav-link{
+    color: var(--marrom-700);
+    padding: 5px;
+    border-radius: 50px;
+}
+
+.nav-link:focus, .nav-link:hover{
+    color: var(--marrom-200);
+    background-color: var(--marrom-700);
+    transition: 300ms;
+}
+
+.form-control {
+    border-radius: 12px;
+    border: 0;
+}
+.form-floating>label {
+    color: #9F9F9F;
+}
+
+.navbar-escura {
+    background-color: var(--marrom-500);
+    padding: 0.7%;
+    z-index: 15;
+}
+
+.btn-vermelho, .btn-verde, .btn-vermelho, .btn-marrom, .btn-azul{
+    border-radius: 50px;
+    color: white;
+}
+
+.btn-verde{
+    background-color: var(--verde);
+}
+.btn-vermelho{
+    background-color: var(--vermelho-500);
+}
+.btn-marrom{
+    background-color: var(--marrom-700);
+}
+.btn-azul{
+    background-color: var(--azul);
+}
+.btn-claro{
+    background-color: var(--marrom-300);
+    color: var(--marrom-700);
+}
+
+.btn-verde:hover{
+    background-color: #3b7047;
+    color: white;
+}
+.btn-vermelho:hover{
+    background-color: #7e3f3f;
+    color: white;
+}
+.btn-marrom:hover{
+    background-color: rgb(90, 52, 52);
+    color: white;
+}
+.btn-azul:hover{
+    background-color: #647bcb;
+    color: white;
+}
+.btn-claro:hover{
+    background-color: #f6e6df;
+    color: var(--marrom-700);
+}
+
+.btn-tela-vendas{
+    position: absolute;
+    top: 10%;
+    right: 5%;
+}
+
+.footer-popover {
+    margin: -1rem;
+    padding: 0.5rem 1rem 1rem 1rem;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.btn-turno{
+    font-size: 0.8rem;
+}

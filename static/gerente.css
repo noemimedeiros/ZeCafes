@@ -1,0 +1,115 @@
+.nav-item{
+    margin-inline: 0;
+}
+
+.container-historico{
+    margin: 0 10% 5% 10%;
+    background-color: var(--marrom-300);
+    border-radius: 12px;
+    padding: 0 1% 1% 1%;
+}
+
+.container-historico .table th, .container-historico .table td{
+    color: var(--marrom-700);
+}
+
+.container-historico .table tbody tr {
+    background-color: white;
+}
+
+.container-historico .table tbody tr td{
+    padding: 10px;
+}
+
+tr td:first-child { border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
+tr td:last-child { border-top-right-radius: 10px; border-bottom-right-radius: 10px; }
+
+.container-historico table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.pesquisar-historico {
+    margin: 5% 10% 1% 10%;
+    color: var(--marrom-200);
+}
+
+.form-control{
+    border-radius: 50px;
+}
+
+.pesquisar-historico .datepicker {
+    background-color: var(--marrom-200);
+    color: var(--marrom-700);
+    border: 0;
+    padding: 8px;
+    border-radius: 12px;
+}
+
+.pesquisa_historico {
+    float: left;
+    margin-left: 16px;
+    margin-top: -26px;
+    position: relative;
+    z-index: 2;
+    color: var(--marrom-700);
+    font-size: 1.1rem;
+}
+
+.page-link{
+    color: var(--marrom-700);
+}
+
+.page-link:hover{
+    color: var(--marrom-700);
+}
+
+.section-baristas{
+    margin: 4% 10% 5% 10%;
+    background-color: var(--marrom-300);
+    border-radius: 12px;
+    padding: 1.5% 2%;
+}
+
+.section-baristas h5{
+    color: var(--marrom-700);
+}
+
+.section-baristas .btn-cadastrar{
+    border-radius: 50px;
+    color: var(--marrom-200)
+}
+
+.section-baristas .card-barista{
+    border-radius: 12px;
+    background-color: white;
+    padding: 5%;
+}
+
+.section-baristas .card-barista p{
+    background-color: var(--marrom-300);
+    border-radius: 50px
+}
+
+.section-baristas .card-barista img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    object-fit: cover;
+}
+
+.section-baristas .form-floating>.form-control,
+.section-baristas .form-floating>.form-control-plaintext {
+  padding: 0rem 0.75rem;
+}
+
+.section-baristas .form-floating>.form-control,
+.section-baristas .form-floating>.form-control-plaintext,
+.section-baristas .form-floating>.form-select {
+  height: calc(2.5rem + 2px);
+  line-height: 1;
+}
+
+.section-baristas .form-floating>label {
+  padding: 0.5rem 0.75rem;
+}

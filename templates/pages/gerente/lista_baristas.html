@@ -1,0 +1,33 @@
+{% include 'pages/gerente/layout_gerente.html' %}
+{% load static %}
+{% block content %}
+<section class="section-baristas shadow">
+    <form class="d-flex " method="get">
+        <h5><b>Painel de Baristas</b></h5>
+        <section class="ms-auto my-auto me-3">
+            <input style="text-indent:35px;" type="search" class="form-control justify-content-end" name="q"><i class="fas fa-search pesquisa_historico"></i>
+        </section>
+        <a href="{% url 'barista:cadastro_baristas' %}" class="btn btn-marrom btn-cadastrar"><i class="fa-solid fa-plus"></i> Cadastrar novo barista</a>
+    </form>
+    <section class="row mt-3">
+        {% for barista in baristas %}
+        <section class="col-sm-4">
+            <section class="card-barista m-1">
+                <section class="row">
+                    <section class="col-sm-3"><img src="{% static 'images/usuario/' %}{{ barista.conta_id.foto }}" alt=""></section>
+                    <section class="col-sm-9 text-center">
+                        <p>{{ barista.conta_id.nome }}</p>
+                        <p>{{ barista.cpf }}</p>
+                    </section>
+                </section>
+                <section class="d-flex flex-row pt-0 justify-content-between">
+                    <button class="btn btn-azul w-100 me-1"><i class="fa-solid fa-user-pen"></i> Editar</button>
+                    <button class="btn btn-vermelho w-100 ms-1"><i class="fa-solid fa-trash-can"></i> Excluir</button>
+                </section>
+            </section>
+        </section>
+        {% endfor %}
+    </section>
+    {% include '../../partials/pagination.html' %}
+</section>
+{% endblock content %}

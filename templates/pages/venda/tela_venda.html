@@ -1,0 +1,416 @@
+{% load static %}
+{% include 'partials/head.html' %}
+<link rel="stylesheet" href="{% static 'venda.css' %}">
+<nav class="navbar-venda navbar navbar-expand-lg nav_tabs fixed-top">
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+        <li class="nav-item active">
+            <input type="radio" id="cafes" class="rd_tab" name="tabs" checked>
+            <label for="cafes" class="tab_label">Café</label>
+            <section class="tab-content section-produtos row me-0">
+                <section class="row cards-produtos col-sm-9">
+                    {% for produto in cafes %}
+                    <section class="col-4">
+                        <div {% if produto.disponivel %}onclick="selecionar_produto(this)"{% endif %} class="card" {% if not produto.disponivel %}style="cursor: default;"{% else %}style="cursor: pointer"{% endif %}>
+                            <input class="produto_selecionado" type="text" hidden>
+                            <input class="tipo_produto" type="text" hidden value="{{ produto.tipo }}">
+                            {% if not produto.disponivel %}
+                            <div class="div-indisponivel">Indisponível</div>
+                            {% endif %}
+                            <img {% if not produto.disponivel %}style="filter: grayscale(1);"{% endif %} class="card-img-top" src="{% static 'images/' %}{{ produto.imagem }}" alt="Card image cap">
+                            <div class="card-body p-0"></div>
+                            <div class="card-footer border-0 bg-white">
+                                <p class="card-text">{{ produto.nome }}</p>
+                                <p class="card-text valor-venda">{{ produto.valor }}</p>
+                            </div>
+                        </div>
+                    </section>
+                    {% endfor %}
+                </section>
+            </section>
+        </li>
+        <li class="nav-item">
+            <input type="radio" id="bebidas" class="rd_tab" name="tabs">
+            <label for="bebidas" class="tab_label">Bebidas</label>
+            <section class="tab-content section-produtos row me-0">
+                <section class="row cards-produtos col-sm-9">
+                    {% for produto in bebidas %}
+                    <section class="col-4">
+                        <div {% if produto.disponivel %}onclick="selecionar_produto(this)"{% endif %} class="card" {% if not produto.disponivel %}style="cursor: default;"{% else %}style="cursor: pointer"{% endif %}>
+                            <input class="produto_selecionado" type="text" hidden>
+                            <input class="tipo_produto" type="text" hidden value="{{ produto.tipo }}">
+                            {% if not produto.disponivel %}
+                            <div class="div-indisponivel">Indisponível</div>
+                            {% endif %}
+                            <img {% if not produto.disponivel %}style="filter: grayscale(1);"{% endif %} class="card-img-top" src="{% static 'images/' %}{{ produto.imagem }}" alt="Card image cap">
+                            <div class="card-body p-0"></div>
+                            <div class="card-footer border-0 bg-white">
+                                <p class="card-text">{{ produto.nome }}</p>
+                                <p class="card-text valor-venda">{{ produto.valor }}</p>
+                            </div>
+                        </div>
+                    </section>
+                    {% endfor %}
+                </section>
+            </section>
+        </li>
+        <li class="nav-item">
+            <input type="radio" id="lanches" class="rd_tab" name="tabs">
+            <label for="lanches" class="tab_label">Lanches</label>
+            <section class="tab-content section-produtos row me-0">
+                <section class="row cards-produtos col-sm-9">
+                    {% for produto in lanches %}
+                    <section class="col-4">
+                        <div {% if produto.disponivel %}onclick="selecionar_produto(this)"{% endif %} class="card" {% if not produto.disponivel %}style="cursor: default;"{% else %}style="cursor: pointer"{% endif %}>
+                            <input class="produto_selecionado" type="text" hidden>
+                            <input class="tipo_produto" type="text" hidden value="{{ produto.tipo }}">
+                            {% if not produto.disponivel %}
+                            <div class="div-indisponivel">Indisponível</div>
+                            {% endif %}
+                            <img {% if not produto.disponivel %}style="filter: grayscale(1);"{% endif %} class="card-img-top" src="{% static 'images/' %}{{ produto.imagem }}" alt="Card image cap">
+                            <div class="card-body p-0"></div>
+                            <div class="card-footer border-0 bg-white">
+                                <p class="card-text">{{ produto.nome }}</p>
+                                <p class="card-text valor-venda">{{ produto.valor }}</p>
+                            </div>
+                        </div>
+                    </section>
+                    {% endfor %}
+                </section>
+            </section>
+        </li>
+        <li class="nav-item">
+            <input type="radio" id="sobremesas" class="rd_tab" name="tabs">
+            <label for="sobremesas" class="tab_label">Sobremesas</label>
+            <section class="tab-content section-produtos row me-0">
+                <section class="row cards-produtos col-sm-9">
+                    {% for produto in sobremesas %}
+                    <section class="col-4">
+                        <div {% if produto.disponivel %}onclick="selecionar_produto(this)"{% endif %} class="card" {% if not produto.disponivel %}style="cursor: default;"{% else %}style="cursor: pointer"{% endif %}>
+                            <input class="produto_selecionado" type="text" hidden>
+                            <input class="tipo_produto" type="text" hidden value="{{ produto.tipo }}">
+                            {% if not produto.disponivel %}
+                            <div class="div-indisponivel">Indisponível</div>
+                            {% endif %}
+                            <img {% if not produto.disponivel %}style="filter: grayscale(1);"{% endif %} class="card-img-top" src="{% static 'images/' %}{{ produto.imagem }}" alt="Card image cap">
+                            <div class="card-body p-0"></div>
+                            <div class="card-footer border-0 bg-white">
+                                <p class="card-text">{{ produto.nome }}</p>
+                                <p class="card-text valor-venda">{{ produto.valor }}</p>
+                            </div>
+                        </div>
+                    </section>
+                    {% endfor %}
+                </section>
+            </section>
+        </li>
+        </ul>
+    </div>
+</nav>
+<form action="" method="POST">
+{% csrf_token %}
+<body class="main-venda">
+    <main>
+        <section class="section-pedido col-3">
+            <section class="titulo-pedido d-flex" id="pedido"><h5><b>Pedido: #</b></h5><h5 id="pedido-numero"></h5></section>
+            <section class="pedidos" id="pedidos-adicionados"></section>
+            <input type="text" hidden name="numero" id="input-pedido-numero">
+            <input type="text" hidden name="descricao" id="input-pedidos-adicionados">
+            <input type="text" hidden name="valor" id="input-pedido-valor">
+            <section class="total d-flex justify-content-between"><h5><b>Total:</b></h5><h5 id="total-pedido"></h5></section>
+            <section><button type="button" class="btn botao-pedido-finalizar" onclick="abrir_modal_finalizar()">Finalizar</button></section>
+        </section>
+        <section id="section-preferencias" class="section-preferencias" style="display: none;">
+            <section class="row">
+                <section class="col-4">
+                    <section class="titulo-preferencias opcionais d-flex flex-row"><p>Tamanho</p></section>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label" for="tamanhoP"><input class="opcionais form-check-input" type="radio" name="tamanhos" id="tamanhoP" value="Pequeno" checked><span>P</span></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label" for="tamanhoM"><input class="opcionais form-check-input" type="radio" name="tamanhos" id="tamanhoM" value="Médio"><span>M</span></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label" for="tamanhoG"><input class="opcionais form-check-input" type="radio" name="tamanhos" id="tamanhoH" value="Grande"><span>G</span></label>
+                    </div>
+                    <section class="titulo-preferencias"><p>Temperatura</p>
+                        <section class="d-flex flex-row">
+                            <img width="40px" src="{% static 'images/gelo.png' %}" alt="">
+                            <div class="form-check form-switch ms-2 me-1 mt-1">
+                                <input class="form-check-input" type="checkbox" id="temperatura" checked>
+                                <label class="form-check-label" for="temperatura"></label>
+                            </div>
+                            <img width="40px" src="{% static 'images/fogo.png' %}" alt="">
+                        </section>
+                    </section>
+                </section>
+                <section class="col-4">
+                    <section class="titulo-preferencias opcionais d-flex flex-row"><p>Açúcar</p>
+                        <div class="form-check form-switch ms-2">
+                            <input class="form-check-input" type="checkbox" id="acucar-btn">
+                            <label class="form-check-label" for="acucar"></label>
+                        </div>
+                    </section>
+                    <div class="acucar">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" for="acucarP"><input class="opcionais form-check-input" type="radio" name="acucares" id="acucarP" value="Açúcar - P" disabled checked><span>P</span></label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" for="acucarM"><input class="opcionais form-check-input" type="radio" name="acucares" id="acucarM" value="Açúcar - M" disabled><span>M</span></label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" for="acucarG"><input class="opcionais form-check-input" type="radio" name="acucares" id="acucarG" value="Açúcar - G" disabled><span>G</span></label>
+                        </div>
+                    </div>
+                    <section class="titulo-preferencias"><p>Para Levar</p>
+                        <section class="d-flex flex-row">
+                            <img width="40px" src="{% static 'images/levar1.png' %}" alt="">
+                            <div class="form-check form-switch ms-2 me-1 mt-1">
+                                <input class="form-check-input" type="checkbox" id="levar">
+                                <label class="form-check-label" for="levar"></label>
+                            </div>
+                            <img width="40px" src="{% static 'images/levar2.png' %}" alt="">
+                        </section>
+                    </section>
+                </section>
+                <section class="col-4">
+                    <section class="titulo-preferencias d-flex flex-row mt-0"><p>Observações</p>
+                        <div class="form-check form-switch ms-2">
+                            <input class="form-check-input" type="checkbox" id="botao-obs">
+                            <label class="form-check-label" for="botao-obs"></label>
+                        </div>
+                    </section>
+                    <textarea id="observacoes" class="form-control" rows="5" disabled></textarea>
+                </section>
+            </section>
+        </section>
+        <section id="section-venda-acoes" style="display: none;" class="section-venda-acoes row">
+            <div class="col qty mt-3">
+                <span class="minus">-</span>
+                <input type="number" class="count" name="qty" value="1">
+                <span class="plus">+</span>
+            </div>
+            <section class="col mt-3 me-2 float-end d-flex flex-row justify-content-end">
+                <h4 id="valor-total" class="mt-2 me-5"></h4>
+                <button type="button" onclick="fechar_produto()" id="cancelar-produto" class="me-3 btn botao-pedido-cancelar btn-vermelho">Cancelar</button>
+                <button type="button" id="adicionar-produto" class="btn botao-pedido-adicionar btn-verde">Adicionar</button>
+            </section>
+        </section>
+    </main>
+    <!-- Modal -->
+    <div class="modal fade" id="finalizar-pedido" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content py-5 px-1">
+                <div class="modal-body text-center finalizar">
+                    <h4 class="mb-5"><b>Finalizar pedido?</b></h4>
+                    <div class="d-flex flex-column">
+                        <button type="button" class="btn btn-verde mb-3 w-50 mx-auto" data-bs-toggle="modal" data-bs-target="#pagamento"><b>Confirmar</b></button>
+                        <button type="button" class="btn btn-vermelho w-50 mx-auto" data-bs-dismiss="modal"><b>Voltar</b></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="pagamento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content py-5 px-1">
+                <div class="modal-body text-center pagamento">
+                    <h4 class="mb-5"><b>Método de Pagamento</b></h4>
+                    <div class="d-flex flex-column">
+                        <button type="submit" name="metodo" value="1" class="btn mb-3 mx-auto d-flex justify-content-between "><img src="{% static 'images/cartao.png' %}" alt=""> Crédito/Débito</button>
+                        <button type="submit" name="metodo" value="3" class="btn mx-auto pix"><img src="{% static 'images/pix.png' %}" alt=""></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</form>
+<script>
+    
+    function abrir_modal_finalizar(){
+        if (document.getElementById('input-pedidos-adicionados').value.match(/^(\s)+$/) || document.getElementById('input-pedidos-adicionados').value != ''){ 
+            $("#finalizar-pedido").modal("show");
+        };
+    }
+    
+    $(document).ready(function(){
+        document.getElementById('pedido-numero').innerHTML = Math.floor(Math.random() * 90000) + 10000 ;
+
+    });
+    function desabilitar_opcoes() {
+        document.getElementById('cafes').disabled = true;
+        document.getElementById('bebidas').disabled = true;
+        document.getElementById('lanches').disabled = true;
+        document.getElementById('sobremesas').disabled = true;
+        for (let card of document.getElementsByClassName('cards-produtos')){ card.style.overflow = 'hidden' }
+    }
+
+    function fechar_produto() {
+        document.querySelectorAll(".card").forEach(card => card.removeAttribute('style'));
+        document.querySelectorAll(".card > .produto_selecionado ").forEach(input => input.value = '');
+        document.getElementById('section-preferencias').style.display = 'none';
+        document.getElementById('section-venda-acoes').style.display = 'none';
+        document.getElementsByName('qty')[0].value = 1;
+        document.getElementById('cafes').disabled = false;
+        document.getElementById('bebidas').disabled = false;
+        document.getElementById('lanches').disabled = false;
+        document.getElementById('sobremesas').disabled = false;
+        for (let card of document.getElementsByClassName('cards-produtos')){ card.style.overflow = 'scroll' };
+        document.getElementById('input-pedidos-adicionados').value = pedido_form.trim();
+        document.getElementById('input-pedido-numero').value = document.getElementById('pedido-numero').innerHTML;
+        document.getElementById('input-pedido-valor').value = document.getElementById('total-pedido').innerHTML;
+    };
+    
+    var valor_produto = 0;
+    var valor = 0;
+    var valor_total = 0;
+    var index = 0;
+    var pedido_form = '';
+
+    function selecionar_produto(produto) {
+        var array_pedidos = [];
+        document.querySelectorAll(".card > .produto_selecionado ").forEach(input => array_pedidos.push(input.value));
+        index = index + 1;
+        if (!array_pedidos.includes("selecionado")){
+            produto.children[0].value = 'selecionado';
+            if (produto.children[1].value == 'Café'){
+                produto.style = 'border: 1.5px solid var(--marrom-700);';
+                document.getElementById('section-preferencias').style.display = 'block';
+                document.getElementById('section-venda-acoes').style.display = 'flex';
+                document.getElementById('valor-total').innerHTML = produto.children[4].children[1].innerText;
+                valor_produto = produto.children[4].children[1].innerText;
+                desabilitar_opcoes();
+                document.getElementById('adicionar-produto').onclick = function () {
+                    let nome_produto = produto.children[4].children[0].innerText;
+                    let check = document.getElementsByName("tamanhos");
+                    let quantidade_produto = document.getElementsByName('qty')[0].value;
+                    for (var i=0;i<check.length;i++){ 
+                        if (check[i].checked == true){ 
+                            var tamanho_produto = check[i].value;
+                        }  else {
+                            // pass
+                        }
+                    };
+                    if (document.getElementById('temperatura').checked){
+                        var temperatura_produto = "Quente";
+                    }if (!document.getElementById('temperatura').checked){
+                        var temperatura_produto = "Gelado";
+                    }
+                    var levar_produto = "Consumo local";
+                    if (document.getElementById('levar').checked){
+                        var levar_produto = "Para levar";
+                    }if (!document.getElementById('temperatura').checked){
+                        var levar_produto = "Consumo local";
+                    }
+                    if (document.getElementById('acucar-btn').checked){
+                        let check_acucar = document.getElementsByName("acucares"); 
+                        for (var i=0;i<check_acucar.length;i++){ 
+                            if (check_acucar[i].checked == true){ 
+                                var acucar_produto = check_acucar[i].value;
+                            }  else {
+                                // pass
+                            }
+                        }
+                    }if (!document.getElementById('acucar-btn').checked){
+                        var acucar_produto = "Sem açúcar"
+                    }
+                    if(document.getElementById('botao-obs').checked){
+                        var observacoes_produto = 'Obs: '+document.getElementById('observacoes').value;
+                    }if (!document.getElementById('botao-obs').checked){
+                        var observacoes_produto = "";
+                    }
+
+                    var pedido = `
+                    <div class="pedido-section" id="${index}"><div class="d-flex"><h6 class="me-3"><b>${quantidade_produto} ${nome_produto}</h6><h6 class="ms-auto me-2">R$${document.getElementById('valor-total').innerHTML}</b></h6><button onclick="excluir_pedido(${index})" class="lixeira-pedido"><i class="fa-solid fa-trash-can"></i></button></div><p class="mb-0">${tamanho_produto}</p><p class="mb-0">${temperatura_produto}</p><p class="mb-0">${acucar_produto}</p><p class="mb-0">${levar_produto}</p><p>${observacoes_produto}</p><hr class="hr-pedido m-0"></hr></div>
+                    `;
+                    pedido_form = pedido_form += `
+                    <div class="pedido-section" id="${index}"><div class="d-flex mt-2"><h6 class="me-3"><b>${quantidade_produto} ${nome_produto}</h6><h6 class="ms-auto">R$${document.getElementById('valor-total').innerHTML}</b></h6></div><p class="mb-0">${tamanho_produto}</p><p class="mb-0">${temperatura_produto}</p><p class="mb-0">${acucar_produto}</p><p class="mb-0">${levar_produto}</p><p>${observacoes_produto}</p><hr class="hr-pedido m-0"></hr></div>
+                    `;
+                    document.getElementById('pedidos-adicionados').innerHTML += pedido;
+                    document.getElementsByName('qty')[0].value = 1;
+                    valor_total = (parseInt(valor_total) + parseFloat(document.getElementById('valor-total').innerHTML.replace(',', '.'))).toFixed(2)
+                    document.getElementById('total-pedido').innerHTML = valor_total;
+                    fechar_produto();
+                }
+            }else {
+                produto.style = 'border: 1px solid var(--marrom-700);';
+                document.getElementById('section-venda-acoes').style.display = 'flex';
+                document.getElementById('valor-total').innerHTML = produto.children[4].children[1].innerText;
+                valor_produto = produto.children[4].children[1].innerText;
+                desabilitar_opcoes();
+                document.getElementById('adicionar-produto').onclick = function () {
+                    let nome_produto = produto.children[4].children[0].innerText;
+                    let quantidade_produto = document.getElementsByName('qty')[0].value;
+                    var pedido = `<div class="pedido-section" id="${index}">
+                    <div class="d-flex"><h6><b>${quantidade_produto} ${nome_produto}</h6><h6 class="ms-auto me-2">R$${document.getElementById('valor-total').innerHTML}</b></h6><button onclick="excluir_pedido(${index})" class="lixeira-pedido"><i class="fa-solid fa-trash-can"></i></button></div>
+                    <hr class="hr-pedido mt-0"></hr>
+                    </div>
+                    `;
+                    pedido_form = pedido_form += `<div class="pedido-section" id="${index}">
+                    <div class="d-flex mt-2"><h6><b>${quantidade_produto} ${nome_produto}</h6><h6 class="ms-auto">R$${document.getElementById('valor-total').innerHTML}</b></h6></div>
+                    <hr class="hr-pedido mt-0"></hr>
+                    </div>
+                    `;
+                    document.getElementById('pedidos-adicionados').innerHTML += pedido;
+                    document.getElementsByName('qty')[0].value = 1;
+                    valor_total = (parseInt(valor_total) + parseFloat(document.getElementById('valor-total').innerHTML.replace(',', '.'))).toFixed(2)
+                    document.getElementById('total-pedido').innerHTML = valor_total;
+                    fechar_produto();
+                }
+            }
+        };
+    }
+
+    function excluir_pedido(index){
+        for (let pedido of document.getElementsByClassName('pedido-section')){
+            if (pedido.id == index){
+                document.getElementById('pedidos-adicionados').removeChild(pedido);
+            }
+        };
+        document.getElementById('input-pedidos-adicionados').value = document.getElementById('pedidos-adicionados').innerHTML;
+    }
+
+    const selecionar_acucar = document.getElementById('acucar-btn');
+    selecionar_acucar.onclick = function () {
+        if (selecionar_acucar.checked){
+        document.querySelectorAll(".acucar > div > label > input").forEach(inputs => inputs.disabled=false );
+        }if (!selecionar_acucar.checked){
+            document.querySelectorAll(".acucar > div > label > input").forEach(inputs => inputs.disabled=true );
+        }
+    }
+
+    const adicionar_observacao = document.getElementById('botao-obs');
+    adicionar_observacao.onclick = function () {
+        if (adicionar_observacao.checked){
+            document.getElementById('observacoes').disabled = false;
+        }if (!adicionar_observacao.checked){
+            document.getElementById('observacoes').disabled = true;
+            document.getElementById('observacoes').value = '';
+        }
+    }
+
+    function atualizar_valor(){
+        valor = (parseFloat(valor_produto.replace(',', '.'))*(parseInt(document.getElementsByName('qty')[0].value))).toFixed(2)
+        document.getElementById('valor-total').innerHTML = valor;
+    }
+
+</script>
+<script>
+$(document).ready(function(){
+    $('.count').prop('disabled', true);
+    $(document).on('click','.plus',function(){
+        $('.count').val(parseInt($('.count').val()) + 1 );
+        atualizar_valor();
+    });
+    $(document).on('click','.minus',function(){
+    $('.count').val(parseInt($('.count').val()) - 1 );
+        if ($('.count').val() == 0) {
+            $('.count').val(1);
+        }
+        atualizar_valor();
+    });
+});
+</script>
+</html>

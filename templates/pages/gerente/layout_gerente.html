@@ -1,0 +1,30 @@
+{% load static %}
+{% include 'partials/head.html' %}
+<link rel="stylesheet" href="{% static 'gerente.css' %}">
+<nav class="navbar-escura navbar navbar-expand-sm navbar-expand-lg mb-2">
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'produtos:historico_pedidos' %}">Histórico de Pedidos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'barista:lista-baristas' %}">Baristas</a>
+      </li>
+    </ul>
+  </div>
+  <button id="foto-usuario" class="foto-usuario" style="background-image: url(../../../static/images/usuario/{{ usuario.foto }});" data-toggle="popover" data-bs-placement="bottom"></button>
+</nav>
+<body class="main-coffee">
+    <main>
+        {% block content %}{% endblock content %}
+    </main>
+</body>
+<script>
+  $(document).ready(function(){
+      $("#foto-usuario").popover({
+          content: '<div ><div class="pb-4">Editar dados</div><div class="bg-light border-top footer-popover"><a class="text-decoration-none text-black" href="{% url 'login' %}">Sair</a></div></div>',
+          html: true,
+          placement : "bottom"
+      }); 
+  });
+  </script>

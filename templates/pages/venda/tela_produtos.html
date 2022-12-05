@@ -1,0 +1,41 @@
+{% include 'pages/venda/layout_barista.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+<link rel="stylesheet" href="{% static 'venda.css' %}">
+{% block content %}
+    <section class="produtos-barista section-produtos row me-0">
+        <section class="row cards-produtos col-11">
+            {% for produto in produtos %}
+            <form class="col-3" action="{% url 'barista:produto_disponivel' produto.id %}" method="POST">
+                {% csrf_token %}
+                <section>
+                    <div class="card">
+                        <img {% if not produto.disponivel %}style="filter: grayscale(1);"{% endif %} class="card-img-top" src="{% static 'images/' %}{{ produto.imagem }}" alt="Card image cap">
+                        <div class="card-body p-0"></div>
+                        <div class="card-footer border-0 bg-white">
+                            <p class="card-text mb-3">{{ produto.nome }}</p>
+                            <button name="produto" value="{{ produto.pk }}" type="submit" class="btn {% if produto.disponivel %}btn-verde{% else %}btn-vermelho{% endif %} w-100">
+                                {% if produto.disponivel %}Disponível{% else %}Indisponivel{% endif %}
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </form>
+            {% endfor %}
+        </section>
+        <section class="col-1 p-0 text-center section-filtragem" style="width: 10%;">
+            <form action="" method="get">
+                <a class="btn btn-claro rounded-pill" data-bs-toggle="collapse" href="#filtros" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa-solid fa-filter me-2"></i>Filtrar</a>
+                <div class="collapse" id="filtros">
+                    <div class="card card-body">
+                        <p><a href="{% url 'barista:tela_produtos' %}"><b><i class="fa-solid fa-filter-circle-xmark me-2"></i>Limpar</b></a></p>
+                        {% for tipo in tipos %}
+                        <p><button type="submit" name="q" value="{{ tipo.tipo }}">{{ tipo.tipo }}</button></p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </form>
+        </section>
+    </section>
+
+{% endblock content %}

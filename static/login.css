@@ -1,0 +1,44 @@
+.main-coffee .container-login {
+    background: var(--marrom-200);
+    border-radius: 20px;
+    width: 480px;
+    height: 450px;
+    margin-inline: auto;
+    margin-top: 7%;
+    padding: 3%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.container-login h1{
+    font-family: 'Leckerli One', cursive;
+    color: var(--marrom-700);
+    font-size: 3rem;
+    text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+}
+
+.container-login img{
+    width: 80px;
+}
+
+.container-login button{
+    background-color: var(--verde);
+    padding: 4%;
+    width: 100%;
+    border-radius: 12px;
+    font-weight: 400;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.chave_seguranca {
+    float: right;
+    margin-right: 16px;
+    margin-top: -40px;
+    position: relative;
+    z-index: 2;
+    color: #9F9F9F;
+    font-size: 1.4rem;
+}

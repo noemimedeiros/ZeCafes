@@ -1,0 +1,71 @@
+{% comment %}
+    Componente de paginação de listas
+{% endcomment %}
+
+{% if is_paginated or page_obj.paginator.num_pages > 1 %}
+{% comment %} <section class="d-block mb-2">
+    Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+</section> {% endcomment %}
+<ul class="pagination pagination-sm">
+
+    {% if page_obj.has_previous and params %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number|safe }}&{{ params }}">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </a>
+        </li>
+    {% elif page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number|safe }}">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </a>
+        </li>
+    {% else %}
+        <li class="page-item disabled"><span class="page-link"><i class="fa fa-chevron-left" aria-hidden="true"></i></span></li>
+    {% endif %}
+
+    {% if page_obj.number > 3 and params %}
+        <li class="page-item"><a class="page-link" href="?page=1&{{ params }}">1</a></li>
+    {% elif page_obj.number > 3 %}
+        <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+    {% endif %}
+
+    {% if page_obj.number|add:'-2' > 1 %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.number|add:'-3'|safe }}">&hellip;</a></li>
+    {% endif %}
+
+    {% for i in page_obj.paginator.page_range %}
+        {% if page_obj.number == i %}
+            <li class="page-item active"><span class="page-link disabled">{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' and params %}
+            <li class="page-item"><a class="page-link" href="?page={{ i|safe }}&{{ params }}">{{ i }}</a></li>
+        {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %}
+            <li class="page-item"><a class="page-link" href="?page={{ i|safe }}">{{ i }}</a></li>
+        {% endif %}
+    {% endfor %}
+
+    {% if page_obj.paginator.num_pages > page_obj.number|add:'2' and params %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.number|add:'3'|safe }}&{{ params }}">&hellip;</a></li>
+    {% elif page_obj.paginator.num_pages > page_obj.number|add:'2' %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.number|add:'3'|safe }}">&hellip;</a></li>
+    {% endif %}
+
+    {% if page_obj.number < page_obj.paginator.num_pages|add:'-2' and params %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.paginator.num_pages|safe }}&{{ params }}">{{ page_obj.paginator.num_pages }}</a>
+        </li>
+    {% elif page_obj.number < page_obj.paginator.num_pages|add:'-2' %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages|safe }}">{{ page_obj.paginator.num_pages }}</a>
+        </li>
+    {% endif %}
+
+    {% if page_obj.has_next and params %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number|safe }}&{{ params }}"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+        </li>
+    {% elif page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number|safe }}"><i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+    {% else %}
+        <li class="page-item disabled"><span class="page-link"><i class="fa fa-chevron-right" aria-hidden="true"></i></span></li>
+    {% endif %}
+</ul>
+{% endif %}

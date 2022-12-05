@@ -1,0 +1,41 @@
+{% include 'pages/gerente/layout_gerente.html' %}
+{% load static %}
+{% block content %}
+<section>
+  <form action="" method="get" class="pesquisar-historico d-flex justify-content-between">
+    <section><input style="text-indent:35px;" type="search" class="form-control" name="q"><i class="fas fa-search pesquisa_historico"></i></section>
+    <section><input name="data_inicio" class="datepicker" autocomplete="off" type="date"> Até <input class="datepicker" autocomplete="off" type="date" name="data_fim"></section>
+  </form>
+</section>
+<section class="container-historico">
+  <table class="table table-borderless text-center">
+    <thead>
+      <tr>
+        <th scope="col">Número</th>
+        <th scope="col">Barista</th>
+        <th scope="col">Pagamento</th>
+        <th scope="col">Tempo gasto</th>
+        <th scope="col">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for pedido in historico %}
+      <tr>
+        <td>#{{ pedido.numero }}</td>
+        <td>{{ pedido.barista.conta_id.nome }}</td>
+        <td>{{ pedido.metodo_pagamento }}</td>
+        <td><i class="fa-regular fa-clock"></i> {{ pedido.tempo_gasto }}</td>
+        <td>R${{ pedido.valor }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% include '../../partials/pagination.html' %}
+</section>
+<script>
+  $('.datepicker').datepicker({
+      format: 'yyyy-mm-dd',
+      language: 'pt-BR'
+  })
+  </script>
+{% endblock content %}

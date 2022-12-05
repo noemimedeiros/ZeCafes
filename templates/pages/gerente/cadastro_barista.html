@@ -1,0 +1,52 @@
+{% include 'pages/gerente/layout_gerente.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<section class="section-baristas">
+    <form action="" method="POST">
+        <section><h5><b>Cadastrar Barista</b></h5></section>
+        <br>
+        <section class="row">
+            <section class="col-sm-3">
+                {{ conta.foto|as_crispy_field }}
+            </section>
+            <section class="col-sm-9">
+                <section class="form-floating">
+                    <input name="nome" type="text" class="form-control" id="id_nome" placeholder="Nome">
+                    <label for="floatingInput">Nome</label>
+                </section>
+                <section class="form-floating my-3">
+                    <input name="cpf" type="text" class="form-control" id="id_cpf" placeholder="CPF">
+                    <label for="floatingInput">CPF</label>
+                </section>
+                <section class="row">
+                    <section class="col-sm-6">
+                        <section class="form-floating">
+                            <input name="telefone" type="text" class="form-control" id="id_telefone" placeholder="telefone">
+                            <label for="floatingInput">Telefone</label>
+                        </section>
+                    </section>
+                    <section class="col-sm-6">
+                        <section class="form-floating">
+                            <input name="data_nascimento" type="text" class="form-control" id="id_data_nascimento" placeholder="data_nascimento">
+                            <label for="floatingInput">Data de Nascimento</label>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        </section>
+        <section class="form-floating my-3">
+            <input name="email" type="text" class="form-control" id="id_email" placeholder="E-mail">
+            <label for="floatingInput">E-mail</label>
+        </section>
+        <section class="form-floating my-3">
+            <input name="email_confirmar" type="text" class="form-control" id="id_email_confirmar" placeholder="Confirmar E-mail">
+            <label for="floatingInput">Confirmar E-mail</label>
+        </section>
+        <section class="d-flex flex-row pt-0 w-50 ms-auto">
+            <a href="{% url 'barista:lista-baristas' %}" class="btn btn-vermelho w-100 me-2">Cancelar</a>
+            <button type="submit" class="btn btn-verde w-100 me-1">Cadastrar</button>
+        </section>
+    </form>
+</section>
+{% endblock content %}

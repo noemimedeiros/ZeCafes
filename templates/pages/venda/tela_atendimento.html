@@ -1,0 +1,28 @@
+{% include 'pages/venda/layout_barista.html' %}
+{% load static %}
+{% block content %}
+<section class="section-atendimento">
+    <hr class="cordao">
+    {% for pedido in pedidos %}
+    <form action="{% url 'barista:finalizar_pedido' pedido.numero %}" method="POST" class="card-atendimento">
+        {% csrf_token %}
+        <section class="prendedor"></section>
+        <section class="pedido-card pb-0">
+            <h4><b>Pedido #{{ pedido.numero }}</b></h4>
+            <hr class="mb-1">
+            <div class="pedido-descricao">{{ pedido.descricao|safe }}</div>
+            <hr>
+        </section>
+        <section class="d-flex flex-row p-3 pt-0 justify-content-between">
+            <input type="text" name="numero" value="{{ pedido.numero }}" hidden>
+            <button type="submit" name="finalizar" value="true" class="btn btn-verde px-3">Finalizar</button><button class="btn btn-vermelho px-3" name="cancelar" type="submit" value="true">Cancelar</button>
+        </section>
+    </form>
+    {% endfor %}
+</section>
+<section class="pedidos-concluidos">
+    {% for pedido in pedidos_concluidos %}
+    <button class="btn btn-marrom">#{{ pedido.numero }}</button>
+    {% endfor %}
+</section>
+{% endblock content %}
