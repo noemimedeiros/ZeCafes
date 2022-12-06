@@ -15,6 +15,7 @@
         <th scope="col">Barista</th>
         <th scope="col">Pagamento</th>
         <th scope="col">Tempo gasto</th>
+        <th scope="col">Status</th>
         <th scope="col">Total</th>
       </tr>
     </thead>
@@ -24,7 +25,8 @@
         <td>#{{ pedido.numero }}</td>
         <td>{{ pedido.barista.conta_id.nome }}</td>
         <td>{{ pedido.metodo_pagamento }}</td>
-        <td><i class="fa-regular fa-clock"></i> {{ pedido.tempo_gasto }}</td>
+        <td><i class="fa-regular fa-clock"></i> {{ pedido.tempo_gasto|date:'H:i:s' }}</td>
+        <td class="{% if pedido.cancelado and not pedido.concluido %}text-danger{% endif %}{% if not pedido.cancelado and pedido.concluido %}text-success{% endif %}">{% if pedido.cancelado and not pedido.concluido %}Cancelado{% endif %}{% if not pedido.cancelado and pedido.concluido %}Concluído{% endif %}</td>
         <td>R${{ pedido.valor }}</td>
       </tr>
       {% endfor %}

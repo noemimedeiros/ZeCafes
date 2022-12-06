@@ -23,7 +23,7 @@ class PedidosForm(forms.ModelForm):
 class PedidosConcluirForm(forms.ModelForm):
     class Meta:
         model = Pedidos
-        fields = ['concluido', 'cancelado']
+        fields = ['concluido', 'cancelado', 'barista', 'tempo_gasto']
 
 class ProdutosForm(forms.ModelForm):
     class Meta:

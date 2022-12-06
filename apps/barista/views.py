@@ -7,7 +7,7 @@ from pedido.models import Pedidos, MetodoPagamento
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, TemplateView, FormView
 from extra_views import SearchableListMixin
 from utils.forms import ProdutosDisponivelForm, BaristaForm, ContaForm, PedidosConcluirForm
-import datetime
+from datetime import date, datetime, timedelta
 from utils.views import ZecafesView
 from utils.forms import PedidosForm
 
@@ -30,8 +30,8 @@ class tela_venda(ZecafesView, ListView):
         form.numero = self.request.POST.get('numero')
         form.descricao = self.request.POST.get('descricao')
         form.metodo_pagamento = MetodoPagamento.objects.get(id=self.request.POST.get('metodo'))
-        form.barista = Barista.objects.get(conta_id=self.request.session['usuario_id'])
         form.valor = float(self.request.POST.get('valor'))
+        form.tempo_gasto = datetime.now().strftime("%H:%M:%S")
         form.save()
         return HttpResponseRedirect(reverse('barista:tela_venda'))
     
@@ -43,7 +43,7 @@ class tela_atendimento_pedidos(ZecafesView, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["pedidos_concluidos"] = Pedidos.objects.filter(concluido=1, data_pedido=datetime.date.today())
+        context["pedidos_concluidos"] = Pedidos.objects.filter(concluido=1, data_pedido=date.today())
         return context
 
     def get_queryset(self, **kwargs):
@@ -68,10 +68,14 @@ class finalizar_pedido(ZecafesView, UpdateView):
         form = PedidosConcluirForm(instance=Pedidos.objects.get(numero=self.request.POST.get('numero'))).save(commit=False)
         if self.request.POST.get('finalizar'):
             form.concluido = True
+            form.barista = Barista.objects.get(conta_id=self.request.session['usuario_id'])
+            form.tempo_gasto = datetime.now() - timedelta(hours = int(form.tempo_gasto.strftime("%H")), minutes  = int(form.tempo_gasto.strftime("%M")), milliseconds  = int(form.tempo_gasto.strftime("%S")))
             form.save()
             return HttpResponseRedirect(self.request.META.get('HTTP_REFERER'))
         if self.request.POST.get('cancelar'):
             form.cancelado = True
+            form.barista = Barista.objects.get(conta_id=self.request.session['usuario_id'])
+            form.tempo_gasto = datetime.now() - timedelta(hours = int(form.tempo_gasto.strftime("%H")), minutes  = int(form.tempo_gasto.strftime("%M")), milliseconds  = int(form.tempo_gasto.strftime("%S")))
             form.save()
             return HttpResponseRedirect(self.request.META.get('HTTP_REFERER'))
 

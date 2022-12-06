@@ -20,7 +20,7 @@ class Pedidos(models.Model):
     observacoes = models.CharField(verbose_name="Observações", max_length=40, null=True, blank=True)
     valor = models.DecimalField(verbose_name="Valor", null=False, blank=False, max_digits=8, decimal_places=2)
     data_pedido = models.DateField(verbose_name="Data do Pedido", null=False, blank=False, default=timezone.now)
-    barista = models.ForeignKey(Barista, on_delete=models.CASCADE, verbose_name="Barista", null=False, blank=False, db_column="barista")
+    barista = models.ForeignKey(Barista, on_delete=models.CASCADE, verbose_name="Barista", null=True, blank=True, db_column="barista")
     concluido = models.BooleanField(verbose_name="Concluído", default=False)
     tempo_gasto = models.TimeField(verbose_name="Tempo Gasto", null=True, blank=True)
     cancelado = models.BooleanField(verbose_name="Cancelado", default=False)

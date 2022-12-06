@@ -20,9 +20,25 @@
     </form>
     {% endfor %}
 </section>
-<section class="pedidos-concluidos">
+<section class="pedidos-concluidos" id="section-concluidos">
     {% for pedido in pedidos_concluidos %}
-    <button class="btn btn-marrom">#{{ pedido.numero }}</button>
+    <a onclick="expandir(this)" class="btn btn-concluidos btn-marrom my-2" data-bs-toggle="collapse" href="#finalizados-{{ forloop.counter }}" role="button" aria-expanded="false" aria-controls="collapseExample">#{{ pedido.numero }}</a>
+    <div class="collapse p-3" id="finalizados-{{ forloop.counter }}">
+        <div class="card card-body">
+            <h4><b>Pedido #{{ pedido.numero }}</b></h4>
+            <hr class="mb-1">
+            <div class="pedido-descricao">{{ pedido.descricao|safe }}</div>
+        </div>
+    </div>
     {% endfor %}
 </section>
+<script>
+    function expandir(concluido){
+        if (concluido.ariaExpanded == "true"){
+            document.getElementById("section-concluidos").style.width = "250px"
+        }if (concluido.ariaExpanded == "false"){
+            document.getElementById("section-concluidos").removeAttribute('style')
+        }
+    }
+</script>
 {% endblock content %}

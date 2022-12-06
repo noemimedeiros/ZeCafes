@@ -11,7 +11,7 @@
 
 .card-atendimento{
     height: 450px;
-    margin: 2%;
+    margin: 22px;
     border-radius: 13px;
     background-color: var(--marrom-300);
     flex-basis: 18.333%;
@@ -42,7 +42,7 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     position: fixed;
     width: 100%;
-    top: 13%;
+    top: 78px;
 }
 
 .section-atendimento .prendedor{
@@ -83,4 +83,8 @@
 .hr-pedido{
     border-style: dashed;
     color: var(--marrom-700);
+}
+
+.pedidos-concluidos .collapse{
+    text-align: initial;
 }

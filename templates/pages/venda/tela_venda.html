@@ -323,14 +323,14 @@
                     }
 
                     var pedido = `
-                    <div class="pedido-section" id="${index}"><div class="d-flex"><h6 class="me-3"><b>${quantidade_produto} ${nome_produto}</h6><h6 class="ms-auto me-2">R$${document.getElementById('valor-total').innerHTML}</b></h6><button onclick="excluir_pedido(${index})" class="lixeira-pedido"><i class="fa-solid fa-trash-can"></i></button></div><p class="mb-0">${tamanho_produto}</p><p class="mb-0">${temperatura_produto}</p><p class="mb-0">${acucar_produto}</p><p class="mb-0">${levar_produto}</p><p>${observacoes_produto}</p><hr class="hr-pedido m-0"></hr></div>
+                    <div class="pedido-section" id="${index}"><div class="d-flex"><h6 class="me-3"><b>${quantidade_produto} ${nome_produto}</h6><h6 class="ms-auto me-2">${document.getElementById('valor-total').innerHTML}</b></h6><button onclick="excluir_pedido(${index})" class="lixeira-pedido"><i class="fa-solid fa-trash-can"></i></button></div><p class="mb-0">${tamanho_produto}</p><p class="mb-0">${temperatura_produto}</p><p class="mb-0">${acucar_produto}</p><p class="mb-0">${levar_produto}</p><p>${observacoes_produto}</p><hr class="hr-pedido m-0"></hr></div>
                     `;
                     pedido_form = pedido_form += `
-                    <div class="pedido-section" id="${index}"><div class="d-flex mt-2"><h6 class="me-3"><b>${quantidade_produto} ${nome_produto}</h6><h6 class="ms-auto">R$${document.getElementById('valor-total').innerHTML}</b></h6></div><p class="mb-0">${tamanho_produto}</p><p class="mb-0">${temperatura_produto}</p><p class="mb-0">${acucar_produto}</p><p class="mb-0">${levar_produto}</p><p>${observacoes_produto}</p><hr class="hr-pedido m-0"></hr></div>
+                    <div class="pedido-section" id="${index}"><div class="d-flex mt-2"><h6 class="me-3"><b>${quantidade_produto} ${nome_produto}</h6></div><p class="mb-0">${tamanho_produto}</p><p class="mb-0">${temperatura_produto}</p><p class="mb-0">${acucar_produto}</p><p class="mb-0">${levar_produto}</p><p>${observacoes_produto}</p><hr class="hr-pedido m-0"></hr></div>
                     `;
                     document.getElementById('pedidos-adicionados').innerHTML += pedido;
                     document.getElementsByName('qty')[0].value = 1;
-                    valor_total = (parseInt(valor_total) + parseFloat(document.getElementById('valor-total').innerHTML.replace(',', '.'))).toFixed(2)
+                    valor_total = (parseFloat(valor_total) + parseFloat(document.getElementById('valor-total').innerHTML.replace(',', '.'))).toFixed(2)
                     document.getElementById('total-pedido').innerHTML = valor_total;
                     fechar_produto();
                 }
@@ -344,18 +344,18 @@
                     let nome_produto = produto.children[4].children[0].innerText;
                     let quantidade_produto = document.getElementsByName('qty')[0].value;
                     var pedido = `<div class="pedido-section" id="${index}">
-                    <div class="d-flex"><h6><b>${quantidade_produto} ${nome_produto}</h6><h6 class="ms-auto me-2">R$${document.getElementById('valor-total').innerHTML}</b></h6><button onclick="excluir_pedido(${index})" class="lixeira-pedido"><i class="fa-solid fa-trash-can"></i></button></div>
+                    <div class="d-flex"><h6><b>${quantidade_produto} ${nome_produto}</h6><h6 class="ms-auto me-2">${document.getElementById('valor-total').innerHTML}</b></h6><button onclick="excluir_pedido(${index})" class="lixeira-pedido"><i class="fa-solid fa-trash-can"></i></button></div>
                     <hr class="hr-pedido mt-0"></hr>
                     </div>
                     `;
                     pedido_form = pedido_form += `<div class="pedido-section" id="${index}">
-                    <div class="d-flex mt-2"><h6><b>${quantidade_produto} ${nome_produto}</h6><h6 class="ms-auto">R$${document.getElementById('valor-total').innerHTML}</b></h6></div>
+                    <div class="d-flex mt-2"><h6><b>${quantidade_produto} ${nome_produto}</h6></div>
                     <hr class="hr-pedido mt-0"></hr>
                     </div>
                     `;
                     document.getElementById('pedidos-adicionados').innerHTML += pedido;
                     document.getElementsByName('qty')[0].value = 1;
-                    valor_total = (parseInt(valor_total) + parseFloat(document.getElementById('valor-total').innerHTML.replace(',', '.'))).toFixed(2)
+                    valor_total = (parseFloat(valor_total) + parseFloat(document.getElementById('valor-total').innerHTML.replace(',', '.'))).toFixed(2)
                     document.getElementById('total-pedido').innerHTML = valor_total;
                     fechar_produto();
                 }
@@ -367,9 +367,13 @@
         for (let pedido of document.getElementsByClassName('pedido-section')){
             if (pedido.id == index){
                 document.getElementById('pedidos-adicionados').removeChild(pedido);
+                document.getElementById('input-pedidos-adicionados').value = document.getElementById('pedidos-adicionados').innerHTML;
+                valor_total = (valor_total - parseFloat(pedido.children[0].children[1].children[0].innerText.replace(',', '.')).toFixed(2)).toFixed(2);
+                document.getElementById('total-pedido').innerHTML = valor_total;
+                document.getElementById('input-pedido-valor').value = document.getElementById('total-pedido').innerHTML;
             }
         };
-        document.getElementById('input-pedidos-adicionados').value = document.getElementById('pedidos-adicionados').innerHTML;
+
     }
 
     const selecionar_acucar = document.getElementById('acucar-btn');

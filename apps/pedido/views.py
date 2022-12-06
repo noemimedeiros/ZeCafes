@@ -3,6 +3,7 @@ from .models import Pedidos
 from django.views.generic import ListView
 from extra_views import SearchableListMixin
 from utils.views import ZecafesView
+from django.db.models import Q
 
 # Create your views here.
 class HistoricoPedidos(ZecafesView, SearchableListMixin, ListView):
@@ -15,5 +16,5 @@ class HistoricoPedidos(ZecafesView, SearchableListMixin, ListView):
     def get_queryset(self):
         if self.request.POST.get('data_fim'):
             return super().get_queryset().filter(date__range=[self.request.GET['data_inicio'], self.request.GET['data_fim']])
-        return super().get_queryset().filter(concluido=1)
+        return super().get_queryset().filter(Q(concluido=1 )| Q(cancelado=1))
     
