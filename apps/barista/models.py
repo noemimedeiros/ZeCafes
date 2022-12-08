@@ -3,7 +3,7 @@ from conta.models import Conta
 
 # Create your models here.
 class Barista(models.Model):
-    conta_id = models.OneToOneField(Conta, on_delete=models.CASCADE, null=False, primary_key=True, db_column="conta_id")
+    conta = models.OneToOneField(Conta, on_delete=models.CASCADE, null=False, primary_key=True, db_column="conta_id")
     cpf = models.CharField(verbose_name="CPF", max_length=15, null=False, blank=False)
     telefone = models.CharField(verbose_name="Telefone", max_length=15, null=True, blank=True)
     data_nascimento = models.DateField(verbose_name="Data de Nascimento", null=False, blank=False)

@@ -14,15 +14,31 @@
         <section class="col-sm-4">
             <section class="card-barista m-1">
                 <section class="row">
-                    <section class="col-sm-3"><img src="{% static 'images/usuario/' %}{{ barista.conta_id.foto }}" alt=""></section>
+                    <section class="col-sm-3"><img src="{% static 'images/' %}{{ barista.conta.foto }}" alt=""></section>
                     <section class="col-sm-9 text-center">
-                        <p>{{ barista.conta_id.nome }}</p>
+                        <p>{{ barista.conta.nome }}</p>
                         <p>{{ barista.cpf }}</p>
                     </section>
                 </section>
                 <section class="d-flex flex-row pt-0 justify-content-between">
-                    <button class="btn btn-azul w-100 me-1"><i class="fa-solid fa-user-pen"></i> Editar</button>
-                    <button class="btn btn-vermelho w-100 ms-1"><i class="fa-solid fa-trash-can"></i> Excluir</button>
+                    <a href="{% url 'barista:editar_baristas' barista.pk %}" class="btn btn-azul w-100 me-1"><i class="fa-solid fa-user-pen"></i> Editar</a>
+                    <button class="btn btn-vermelho w-100 ms-1" data-bs-toggle="modal" data-bs-target="#excluir-barista"><i class="fa-solid fa-trash-can"></i> Excluir</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="excluir-barista" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header p-3"><h4 class="mb-1"><b>Tem certeza que deseja excluir este barista?</b></h4></div>
+                                <div class="modal-body">
+                                    <p class="bg-white">Após a confirmação, todos os dados serão excluídos permanentemente.</p>
+                                </div>
+                                <form class="modal-footer" action="{% url 'barista:excluir_barista' barista.pk %}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="button" class="btn btn-vermelho" data-bs-dismiss="modal"><b>Cancelar</b></button>
+                                    <button type="submit" class="btn btn-verde" ><b>Confirmar</b></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </section>
         </section>
@@ -30,4 +46,5 @@
     </section>
     {% include '../../partials/pagination.html' %}
 </section>
+
 {% endblock content %}

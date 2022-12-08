@@ -37,7 +37,6 @@
 }
 
 .cards-produtos .card:hover{
-    border-color: var(--marrom-700);
     transition: 800ms;
 }
 
@@ -127,8 +126,8 @@
 .section-preferencias label span {
     position: relative;
     text-align: center;
-    font-size: 1rem;
-    left: -22px;
+    font-size: 1.1rem;
+    left: -23px;
     color: white;
     top: 6px;
 }
@@ -367,17 +366,11 @@
     position: absolute;
 }
 
-.tab_label:hover{
-    background-color: var(--marrom-700);
-    border-radius: 50px;
-    color:var(--marrom-300);
-    transition: 200ms;
-}
-
 .nav_tabs .rd_tab:checked ~ label { 
     background-color: var(--marrom-700);
     border-radius: 50px;
     color:var(--marrom-300);
+    transition: 200ms;
 }
 
 .tab-content{

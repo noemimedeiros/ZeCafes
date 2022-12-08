@@ -23,7 +23,7 @@
       {% for pedido in historico %}
       <tr>
         <td>#{{ pedido.numero }}</td>
-        <td>{{ pedido.barista.conta_id.nome }}</td>
+        <td>{{ pedido.barista.conta.nome }}</td>
         <td>{{ pedido.metodo_pagamento }}</td>
         <td><i class="fa-regular fa-clock"></i> {{ pedido.tempo_gasto|date:'H:i:s' }}</td>
         <td class="{% if pedido.cancelado and not pedido.concluido %}text-danger{% endif %}{% if not pedido.cancelado and pedido.concluido %}text-success{% endif %}">{% if pedido.cancelado and not pedido.concluido %}Cancelado{% endif %}{% if not pedido.cancelado and pedido.concluido %}Concluído{% endif %}</td>
@@ -34,10 +34,12 @@
   </table>
   {% include '../../partials/pagination.html' %}
 </section>
+{% endblock content %}
+{% block scripts %}
 <script>
   $('.datepicker').datepicker({
       format: 'yyyy-mm-dd',
       language: 'pt-BR'
   })
   </script>
-{% endblock content %}
+{% endblock scripts %}

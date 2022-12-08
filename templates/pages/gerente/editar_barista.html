@@ -3,17 +3,17 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <section class="section-baristas section-cadastro">
-    <form class="form-prevent-multi-submits" action="" method="POST" enctype='multipart/form-data'>
+    <form class="form-prevent-multi-submits" action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <section><h5><b>Cadastrar Barista</b></h5></section>
+        <section><h5><b>Editar Dados</b></h5></section>
         <br>
         <section class="row">
             <section class="col-sm-3">
                 <section class="section-foto">
                     <section class="perfil-container m-0" id="input_foto">
-                        <img id="perfil-preview" class="position-relative">
+                        <img src="{% static 'images/' %}{{ barista.conta.foto }}" id="perfil-preview" class="position-relative">
                     </section>
-                    <section class="mt-2">{{ conta.foto }}</section>
+                    <section class="mt-2"><input type="file" name="foto" accept="image/*" id="id_foto"></section>
                     <section class="label-foto pb-3 pt-1">
                         <label for='id_foto' class="btn btn-sm w-100 text-center text-decoration-none" required>Carregar foto</label>
                     </section>
@@ -21,21 +21,21 @@
             </section>
             <section class="col-sm-9">
                 <section class="">
-                    <input name="nome" type="text" class="form-control" id="id_nome" placeholder="Nome" required>
+                    <input name="nome" type="text" class="form-control" id="id_nome" placeholder="Nome" value="{{ barista.conta.nome }}" required>
                 </section>
                 <section class="my-3">
-                    <input maxlength="12" name="cpf" type="text" class="form-control" id="id_cpf" placeholder="CPF" required>
+                    <input maxlength="12" name="cpf" type="text" class="form-control" id="id_cpf" value="{{ barista.cpf }}" placeholder="CPF" required>
                 </section>
                 <section class="row">
                     <section class="col-sm-6">
                         <section class="">
-                            <input maxlength="14" style="text-indent:35px;" name="telefone" type="text" class="form-control" id="id_telefone" placeholder="Telefone" required>
+                            <input maxlength="14" style="text-indent:35px;" name="telefone" type="text" class="form-control" id="id_telefone" placeholder="Telefone" value="{{ barista.telefone }}" required>
                             <i class="fa-solid fa-phone icone"></i>
                         </section>
                     </section>
                     <section class="col-sm-6">
                         <section class="">
-                            <input style="text-indent:35px;" name="data_nascimento" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" id="id_data_nascimento" placeholder="Data de Nascimento" required>
+                            <input style="text-indent:35px;" name="data_nascimento" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" id="id_data_nascimento" placeholder="Data de Nascimento"  value="{{ barista.data_nascimento|date:'Y-m-d' }}" required>
                             <i class="fa-solid fa-calendar-days icone"></i>
                         </section>
                     </section>
@@ -43,7 +43,7 @@
             </section>
         </section>
         <section class="my-3">
-            <input name="email" type="text" class="form-control" id="id_email" placeholder="E-mail" required>
+            <input name="email" type="text" class="form-control" id="id_email" placeholder="E-mail" value="{{ barista.email }}" required>
         </section>
         <section class="my-3">
             <input name="email_confirmar" type="text" class="form-control" id="id_email_confirmar" placeholder="Confirmar E-mail" required>

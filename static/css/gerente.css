@@ -98,18 +98,80 @@ tr td:last-child { border-top-right-radius: 10px; border-bottom-right-radius: 10
     object-fit: cover;
 }
 
-.section-baristas .form-floating>.form-control,
-.section-baristas .form-floating>.form-control-plaintext {
-  padding: 0rem 0.75rem;
+.section-foto{
+    background-color: white;
+    border-radius: 12px;
 }
 
-.section-baristas .form-floating>.form-control,
-.section-baristas .form-floating>.form-control-plaintext,
-.section-baristas .form-floating>.form-select {
-  height: calc(2.5rem + 2px);
-  line-height: 1;
+.perfil-container .perfil-label {
+    z-index: 0;
+    position: absolute;
+    text-align: center;
+    align-self: center;
+    width: 100%;
 }
 
-.section-baristas .form-floating>label {
-  padding: 0.5rem 0.75rem;
+.perfil-container {
+    position: relative;
+    display: flex;
+}
+
+.perfil-container img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    background-image: url('../images/upload.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 30px;
+    border: 1px solid var(--marrom-700);
+    border-style: dashed;
+    border-radius: 12px;
+    margin: 13px;
+    cursor: pointer;
+}
+
+input[type="file"] {
+    opacity: 0;
+    width: 3px;
+    margin-left: 90px;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+
+.label-foto {
+    height: 0px;
+}
+
+.perfil-container,
+.perfil-container img {
+    height: 85px !important;
+}
+
+.label-foto label{
+    color: var(--marrom-700);
+    font-size: 1rem;
+    margin-top: -45px;
+}
+
+.section-cadastro{
+    margin: 4% 17% 5% 17%;
+}
+
+.icone {
+    float: left;
+    margin-left: 16px;
+    margin-top: -29px;
+    position: relative;
+    z-index: 2;
+    color: var(--marrom-700);
+    font-size: 1.4rem;
+}
+
+.section-cadastro input{
+    text-indent: 10px;
 }

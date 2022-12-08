@@ -12,7 +12,7 @@
       </li>
     </ul>
   </div>
-  <button id="foto-usuario" class="foto-usuario" style="background-image: url(../../../static/images/usuario/{{ usuario.foto }});" data-toggle="popover" data-bs-placement="bottom"></button>
+  <button id="foto-usuario" class="foto-usuario" style="background-image: url(../../../static/images/{{ usuario.foto }});" data-toggle="popover" data-bs-placement="bottom"></button>
 </nav>
 <body class="main-coffee">
     <main>
@@ -22,9 +22,10 @@
 <script>
   $(document).ready(function(){
       $("#foto-usuario").popover({
-          content: '<div ><div class="pb-4">Editar dados</div><div class="bg-light border-top footer-popover"><a class="text-decoration-none text-black" href="{% url 'login' %}">Sair</a></div></div>',
+          content: '<div><div class="bg-light pt-4"><a class="text-decoration-none text-black" href="{% url 'login' %}">Sair</a></div></div>',
           html: true,
           placement : "bottom"
       }); 
   });
-  </script>
+</script>
+{% block scripts %}{% endblock scripts %}

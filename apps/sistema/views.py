@@ -12,16 +12,18 @@ class tela_login(FormView):
     template_name = "pages/login.html"
     form_class = ContaForm
 
-    def logar_usuario(self, chave_de_seguranca):
-        try:
-            login = Conta.objects.get(chave_seguranca=chave_de_seguranca)
-            return login
-        except Conta.DoesNotExist:
-            self.mensagem = 'Chave de segurança inválida'
-            return None
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        self.request.session.flush()
+        return context
     
     def post(self, request):
-        login = self.logar_usuario(self.request.POST.get('chave_seguranca'))
+        try:
+            login = Conta.objects.get(chave_seguranca=self.request.POST.get('chave_seguranca'))
+        except Conta.DoesNotExist:
+            self.mensagem = 'Chave de segurança inválida'
+            login =  None
+        
         if login != None:
             request.session['usuario_id'] = login.id
             if login.tipo:

@@ -10,10 +10,18 @@ class ContaForm(forms.ModelForm):
         model = Conta
         fields = '__all__'
 
+    def __init__(self, *args, **kwargs):
+        super(ContaForm, self).__init__(*args, **kwargs)
+        self.fields['chave_seguranca'].required = False
+
 class BaristaForm(forms.ModelForm):
     class Meta:
         model = Barista
         fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(BaristaForm, self).__init__(*args, **kwargs)
+        self.fields['conta'].required = False
 
 class PedidosForm(forms.ModelForm):
     class Meta:

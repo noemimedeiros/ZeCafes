@@ -10,7 +10,7 @@
             <section class="tab-content section-produtos row me-0">
                 <section class="row cards-produtos col-sm-9">
                     {% for produto in cafes %}
-                    <section class="col-4">
+                    <section class="col-4" onclick="scrollIntoView({behavior: 'smooth'})">
                         <div {% if produto.disponivel %}onclick="selecionar_produto(this)"{% endif %} class="card" {% if not produto.disponivel %}style="cursor: default;"{% else %}style="cursor: pointer"{% endif %}>
                             <input class="produto_selecionado" type="text" hidden>
                             <input class="tipo_produto" type="text" hidden value="{{ produto.tipo }}">
@@ -35,7 +35,7 @@
             <section class="tab-content section-produtos row me-0">
                 <section class="row cards-produtos col-sm-9">
                     {% for produto in bebidas %}
-                    <section class="col-4">
+                    <section class="col-4" onclick="scrollIntoView({behavior: 'smooth'})">
                         <div {% if produto.disponivel %}onclick="selecionar_produto(this)"{% endif %} class="card" {% if not produto.disponivel %}style="cursor: default;"{% else %}style="cursor: pointer"{% endif %}>
                             <input class="produto_selecionado" type="text" hidden>
                             <input class="tipo_produto" type="text" hidden value="{{ produto.tipo }}">
@@ -60,7 +60,7 @@
             <section class="tab-content section-produtos row me-0">
                 <section class="row cards-produtos col-sm-9">
                     {% for produto in lanches %}
-                    <section class="col-4">
+                    <section class="col-4" onclick="scrollIntoView({behavior: 'smooth'})">
                         <div {% if produto.disponivel %}onclick="selecionar_produto(this)"{% endif %} class="card" {% if not produto.disponivel %}style="cursor: default;"{% else %}style="cursor: pointer"{% endif %}>
                             <input class="produto_selecionado" type="text" hidden>
                             <input class="tipo_produto" type="text" hidden value="{{ produto.tipo }}">
@@ -85,7 +85,7 @@
             <section class="tab-content section-produtos row me-0">
                 <section class="row cards-produtos col-sm-9">
                     {% for produto in sobremesas %}
-                    <section class="col-4">
+                    <section class="col-4" onclick="scrollIntoView({behavior: 'smooth'})">
                         <div {% if produto.disponivel %}onclick="selecionar_produto(this)"{% endif %} class="card" {% if not produto.disponivel %}style="cursor: default;"{% else %}style="cursor: pointer"{% endif %}>
                             <input class="produto_selecionado" type="text" hidden>
                             <input class="tipo_produto" type="text" hidden value="{{ produto.tipo }}">
@@ -117,7 +117,7 @@
             <input type="text" hidden name="numero" id="input-pedido-numero">
             <input type="text" hidden name="descricao" id="input-pedidos-adicionados">
             <input type="text" hidden name="valor" id="input-pedido-valor">
-            <section class="total d-flex justify-content-between"><h5><b>Total:</b></h5><h5 id="total-pedido"></h5></section>
+            <section class="total d-flex"><h5><b>Total:</b></h5><h5 class="ms-auto">R$</h5><h5 id="total-pedido">0,00</h5></section>
             <section><button type="button" class="btn botao-pedido-finalizar" onclick="abrir_modal_finalizar()">Finalizar</button></section>
         </section>
         <section id="section-preferencias" class="section-preferencias" style="display: none;">
@@ -191,7 +191,7 @@
                 <span class="plus">+</span>
             </div>
             <section class="col mt-3 me-2 float-end d-flex flex-row justify-content-end">
-                <h4 id="valor-total" class="mt-2 me-5"></h4>
+                <h4 class="mt-2 me-1">R$</h4><h4 id="valor-total" class="mt-2 me-5"></h4>
                 <button type="button" onclick="fechar_produto()" id="cancelar-produto" class="me-3 btn botao-pedido-cancelar btn-vermelho">Cancelar</button>
                 <button type="button" id="adicionar-produto" class="btn botao-pedido-adicionar btn-verde">Adicionar</button>
             </section>

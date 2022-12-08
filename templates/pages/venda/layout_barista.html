@@ -13,7 +13,7 @@
       </li>
     </ul>
   </div>
-  <button id="foto-usuario" class="foto-usuario" style="background-image: url(../../../static/images/usuario/{{ usuario.foto }});" data-toggle="popover" data-bs-placement="bottom"></button>
+  <button id="foto-usuario" class="foto-usuario" style="background-image: url(../../../static/images/{{ usuario.foto }});" data-toggle="popover" data-bs-placement="bottom"></button>
 </nav>
 <body class="main-coffee">
     <main>
@@ -23,9 +23,15 @@
 <script>
 $(document).ready(function(){
     $("#foto-usuario").popover({
-        content: '<div><div class="pb-4"><a class="btn btn-vermelho btn-turno">Finalizar turno</a></div><div class="bg-light border-top footer-popover"><a class="text-decoration-none text-black" href="{% url 'login' %}">Sair</a></div></div>',
+        title : `<div><a type="button" id="btn-turno" data-bs-toggle="modal" data-bs-target="#encerrar-turno" class="btn btn-vermelho btn-turno">Finalizar turno</a></div>`,
+        content: `<div class="bg-light border-top footer-popover"><a class="text-decoration-none text-black" href="{% url 'login' %}">Sair</a></div>`,
         html: true,
         placement : "bottom"
     }); 
+    $(document).on("click", ".popover #btn-turno" , function(){
+      $("#encerrar-turno").modal("show");
+    });
 });
+
 </script>
+{% block scripts %}{% endblock scripts %}

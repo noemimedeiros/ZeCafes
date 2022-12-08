@@ -22,15 +22,31 @@
 </section>
 <section class="pedidos-concluidos" id="section-concluidos">
     {% for pedido in pedidos_concluidos %}
-    <a onclick="expandir(this)" class="btn btn-concluidos btn-marrom my-2" data-bs-toggle="collapse" href="#finalizados-{{ forloop.counter }}" role="button" aria-expanded="false" aria-controls="collapseExample">#{{ pedido.numero }}</a>
-    <div class="collapse p-3" id="finalizados-{{ forloop.counter }}">
-        <div class="card card-body">
-            <h4><b>Pedido #{{ pedido.numero }}</b></h4>
-            <hr class="mb-1">
-            <div class="pedido-descricao">{{ pedido.descricao|safe }}</div>
+    <div>
+        <a onclick="expandir(this)" class="btn btn-concluidos btn-marrom my-2" data-bs-toggle="collapse" href="#finalizados-{{ forloop.counter }}" role="button" aria-expanded="false" aria-controls="collapseExample">#{{ pedido.numero }}</a>
+        <div class="collapse p-3" id="finalizados-{{ forloop.counter }}">
+            <div class="card card-body">
+                <h4><b>Pedido #{{ pedido.numero }}</b></h4>
+                <hr class="mb-1">
+                <div class="pedido-descricao descricao-concluidos">{{ pedido.descricao|safe }}</div>
+            </div>
         </div>
     </div>
     {% endfor %}
 </section>
-<script src="{% static 'js/tela_atendimento.js' %}"></script>
+<!-- Modal -->
+<div class="modal fade" id="encerrar-turno" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content py-5 px-1">
+            <div class="modal-body text-center finalizar">
+                <h4 class="mb-5"><b>Deseja realmente encerrar o turno?</b></h4>
+                <a href="{% url 'login' %}" class="btn btn-verde mb-3 w-50 mx-auto"><b>Encerrar</b></a>
+                <button type="button" class="btn btn-vermelho w-50 mx-auto" data-bs-dismiss="modal"><b>Cancelar</b></button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}
+{% block scripts %}
+<script src="{% static 'js/tela_atendimento.js' %}"></script>
+{% endblock scripts %}

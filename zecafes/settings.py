@@ -151,3 +151,10 @@ STATIC_ROOT= os.path.join(BASE_DIR,'static/media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+# Endereçamento de imagens salvas
+MEDIA_URL = '/zecafes/static/images/'
+
+MEDIA_ROOT = (
+  os.path.join(BASE_DIR, "zecafes/static/images/") #pasta media para abrigar os arquivos dos usuários
+)

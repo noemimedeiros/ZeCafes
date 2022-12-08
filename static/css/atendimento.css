@@ -64,6 +64,7 @@
     top: 2%;
     padding-top: 4%;
     text-align: center;
+    overflow-y: scroll;
 }
 
 .pedidos-concluidos .btn-vermelho{
@@ -87,4 +88,9 @@
 
 .pedidos-concluidos .collapse{
     text-align: initial;
+}
+
+.descricao-concluidos{
+    height: 250px;
+    overflow-y: scroll;
 }

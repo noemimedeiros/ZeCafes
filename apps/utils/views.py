@@ -5,4 +5,3 @@ class ZecafesView():
         context = super().get_context_data(**kwargs)
         context["usuario"] = Conta.objects.get(id=self.request.session['usuario_id'])
         return context
-    
