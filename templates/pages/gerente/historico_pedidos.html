@@ -1,10 +1,11 @@
 {% include 'pages/gerente/layout_gerente.html' %}
 {% load static %}
 {% block content %}
+<title>Histórico de pedidos</title>
 <section>
   <form action="" method="get" class="pesquisar-historico d-flex justify-content-between">
     <section><input style="text-indent:35px;" type="search" class="form-control" name="q"><i class="fas fa-search pesquisa_historico"></i></section>
-    <section><input name="data_inicio" class="datepicker" autocomplete="off" type="date"> Até <input class="datepicker" autocomplete="off" type="date" name="data_fim"></section>
+    <section><input name="data_inicio" class="datepicker" autocomplete="off" type="date"> Até <input class="datepicker" autocomplete="off" type="date" name="data_fim" onchange="this.form.submit()"></section>
   </form>
 </section>
 <section class="container-historico">

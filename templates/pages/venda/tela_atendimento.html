@@ -1,7 +1,8 @@
 {% include 'pages/venda/layout_barista.html' %}
 {% load static %}
 {% block content %}
-<section class="section-atendimento">
+<title>Atendimento | Pedidos</title>
+<section class="section-atendimento" id="section-atendimento">
     <hr class="cordao">
     {% for pedido in pedidos %}
     <form action="{% url 'barista:finalizar_pedido' pedido.numero %}" method="POST" class="card-atendimento">

@@ -1,6 +1,7 @@
 {% include 'pages/gerente/layout_gerente.html' %}
 {% load static %}
 {% block content %}
+<title>Painel de Baristas</title>
 <section class="section-baristas shadow">
     <form class="d-flex " method="get">
         <h5><b>Painel de Baristas</b></h5>
@@ -22,9 +23,9 @@
                 </section>
                 <section class="d-flex flex-row pt-0 justify-content-between">
                     <a href="{% url 'barista:editar_baristas' barista.pk %}" class="btn btn-azul w-100 me-1"><i class="fa-solid fa-user-pen"></i> Editar</a>
-                    <button class="btn btn-vermelho w-100 ms-1" data-bs-toggle="modal" data-bs-target="#excluir-barista"><i class="fa-solid fa-trash-can"></i> Excluir</button>
+                    <button class="btn btn-vermelho w-100 ms-1" data-bs-toggle="modal" data-bs-target="#excluir-barista-{{ forloop.counter }}"><i class="fa-solid fa-trash-can"></i> Excluir</button>
                     <!-- Modal -->
-                    <div class="modal fade" id="excluir-barista" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="excluir-barista-{{ forloop.counter }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header p-3"><h4 class="mb-1"><b>Tem certeza que deseja excluir este barista?</b></h4></div>

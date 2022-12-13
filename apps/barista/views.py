@@ -17,7 +17,7 @@ from utils.utils import random_generator
 from django.contrib.auth.decorators import login_required, permission_required
 
 # Create your views here.
-class tela_venda(ZecafesView, ListView):
+class tela_venda(ListView):
     template_name = "pages/venda/tela_venda.html"
     model = Produtos
     context_object_name = "produtos"
@@ -44,6 +44,7 @@ class tela_atendimento_pedidos(ZecafesView, ListView):
     template_name = "pages/venda/tela_atendimento.html"
     model = Pedidos
     context_object_name = "pedidos"
+    ordering = ['-tempo_gasto']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -101,7 +102,7 @@ class produto_disponivel(ZecafesView, UpdateView):
 class lista_baristas(UserPassesTestMixin, ZecafesView, SearchableListMixin, ListView):
     template_name = "pages/gerente/lista_baristas.html"
     model = Barista
-    search_fields = ['conta_id__nome']
+    search_fields = ['conta_id__nome', 'cpf']
     context_object_name = 'baristas'
     paginate_by = 6
 

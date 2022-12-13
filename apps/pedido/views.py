@@ -23,7 +23,7 @@ class HistoricoPedidos(UserPassesTestMixin, ZecafesView, SearchableListMixin, Li
         return redirect('barista:tela_atendimento')
 
     def get_queryset(self):
-        if self.request.POST.get('data_fim'):
-            return super().get_queryset().filter(date__range=[self.request.GET['data_inicio'], self.request.GET['data_fim']])
-        return super().get_queryset().filter(Q(concluido=1 )| Q(cancelado=1))
-    
+        if self.request.GET.get('data_fim'):
+            return super().get_queryset().filter(Q(Q(concluido=1) | Q(cancelado=1)) & Q(data_pedido__range=[self.request.GET.get('data_inicio'), self.request.GET.get('data_fim')]))
+        else:
+            return super().get_queryset().filter(Q(concluido=1 )| Q(cancelado=1))

@@ -31,7 +31,7 @@
     overflow-y: scroll;
 }
 
-.card-atendimento .pedido-card .pedido-descricao::-webkit-scrollbar{
+.card-atendimento .pedido-card .pedido-descricao::-webkit-scrollbar, .pedidos-concluidos::-webkit-scrollbar, .pedidos-concluidos .descricao-concluidos::-webkit-scrollbar{
    display: none;
 }
 

@@ -30,22 +30,22 @@ $(document).ready(function(){
 });
 
 function desabilitar_opcoes() {
-    cafesdisabled = true;
+    cafes.disabled = true;
     bebidas.disabled = true;
-    lanchesdisabled = true;
+    lanches.disabled = true;
     sobremesas.disabled = true;
     for (let card of cards_produtos){ card.style.overflow = 'hidden' }
 }
 
 function fechar_produto() {
-    document.querySelectorAll(".card").forEach(card => card.removeAttribute('style'));
+    document.querySelectorAll(".card").forEach(card => card.style.border = '');
     document.querySelectorAll(".card > .produto_selecionado ").forEach(input => input.value = '');
     section_preferencias.style.display = 'none';
     section_venda_acoes.style.display = 'none';
     document.getElementsByName('qty')[0].value = 1;
-    cafesdisabled = false;
+    cafes.disabled = false;
     bebidas.disabled = false;
-    lanchesdisabled = false;
+    lanches.disabled = false;
     sobremesas.disabled = false;
     for (let card of cards_produtos){ card.style.overflow = 'scroll' };
     acucares[0].checked = true;
@@ -66,6 +66,7 @@ var valor = 0;
 var valor_total = 0;
 var index = 0;
 var pedido_form = '';
+var pedido_form_html = document.createElement('div');
 
 function selecionar_produto(produto) {
     var array_pedidos = [];
@@ -148,6 +149,7 @@ function selecionar_produto(produto) {
                     <hr class="hr-pedido m-0"></hr>
                 </div>
                 `;
+                pedido_form_html.innerHTML = pedido_form;
                 document.getElementById('pedidos-adicionados').innerHTML += pedido;
                 document.getElementsByName('qty')[0].value = 1;
                 valor_total = (parseFloat(valor_total) + parseFloat(h4_valor_total.innerHTML.replace(',', '.'))).toFixed(2)
@@ -181,6 +183,7 @@ function selecionar_produto(produto) {
                     <hr class="hr-pedido mt-0"></hr>
                 </div>
                 `;
+                pedido_form_html.innerHTML = pedido_form;
                 document.getElementById('pedidos-adicionados').innerHTML += pedido;
                 document.getElementsByName('qty')[0].value = 1;
                 valor_total = (parseFloat(valor_total) + parseFloat(h4_valor_total.innerHTML.replace(',', '.'))).toFixed(2);
@@ -195,13 +198,17 @@ function excluir_pedido(index){
     for (let pedido of document.getElementsByClassName('pedido-section')){
         if (pedido.id == index){
             document.getElementById('pedidos-adicionados').removeChild(pedido);
-            input_pedidos_adicionados.value = document.getElementById('pedidos-adicionados').innerHTML;
             valor_total = (valor_total - parseFloat(pedido.children[0].children[2].children[0].innerText.replace(',', '.')).toFixed(2)).toFixed(2);
             h5_total_pedido.innerHTML = valor_total.replace(".", ",");
-            input_pedido_valor.value = h5_total_pedido.innerHTML;
+            input_pedido_valor.value = h5_total_pedido.innerHTML.replace(',', '.');
         }
     };
-
+    for (let pedido of pedido_form_html.children){
+        if (pedido.id == index){
+            pedido_form_html.removeChild(pedido);
+            input_pedidos_adicionados.value = pedido_form_html.innerHTML.trim();
+        }
+    }
 }
 
 selecionar_acucar.onclick = function () {

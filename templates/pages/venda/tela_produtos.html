@@ -1,6 +1,7 @@
 {% include 'pages/venda/layout_barista.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
+<title>Atendimento | Produtos</title>
 <link rel="stylesheet" href="{% static 'css/venda.css' %}">
 {% block content %}
     <section class="produtos-barista section-produtos row me-0">
@@ -27,7 +28,7 @@
             <form action="" method="get">
                 <a class="btn btn-claro rounded-pill" data-bs-toggle="collapse" href="#filtros" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa-solid fa-filter me-2"></i>Filtrar</a>
                 <div class="collapse" id="filtros">
-                    <div class="card card-body">
+                    <div class="card card-body" style="padding: 15px 1px">
                         <p><a href="{% url 'barista:tela_produtos' %}"><b><i class="fa-solid fa-filter-circle-xmark me-2"></i>Limpar</b></a></p>
                         {% for tipo in tipos %}
                         <p><button type="submit" name="q" value="{{ tipo.tipo }}">{{ tipo.tipo }}</button></p>

@@ -27,7 +27,7 @@ class tela_login(FormView):
         if login != None:
             request.session['usuario_id'] = login.id
             if login.tipo:
-                return HttpResponseRedirect(reverse('produtos:historico_pedidos'))
+                return HttpResponseRedirect(reverse('pedidos:historico_pedidos'))
             if not login.tipo:
                 return HttpResponseRedirect(reverse('barista:tela_atendimento'))
         if self.mensagem != None:
