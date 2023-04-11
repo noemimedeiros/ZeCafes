@@ -219,8 +219,14 @@
                 <div class="modal-body text-center pagamento">
                     <h4 class="mb-5"><b>Método de Pagamento</b></h4>
                     <div class="d-flex flex-column">
-                        <button type="submit" name="metodo" value="1" class="btn mb-3 mx-auto d-flex justify-content-between "><img src="{% static 'images/cartao.png' %}" alt=""> Crédito/Débito</button>
-                        <button type="submit" name="metodo" value="3" class="btn mx-auto pix"><img src="{% static 'images/pix.png' %}" alt=""></button>
+                        <button type="button" class="btn mx-auto d-flex justify-content-between cartao" data-bs-toggle="collapse" href="#credito-debito" role="button" aria-expanded="false" aria-controls="credito-debito"><img src="{% static 'images/cartao.png' %}" alt=""> Crédito/Débito</button>
+                        <div class="collapse opcoes-cartao" id="credito-debito">
+                            <div class="card card-body border-0 py-1">
+                                <button type="submit" name="metodo" value="1" class="btn my-1 mx-auto">Crédito</button>
+                                <button type="submit" name="metodo" value="2" class="btn mx-auto">Débito</button>
+                            </div>
+                        </div>
+                        <button type="submit" name="metodo" value="3" class="btn mt-3 mx-auto pix"><img src="{% static 'images/pix.png' %}" alt=""></button>
                     </div>
                 </div>
             </div>
@@ -228,4 +234,15 @@
     </div>
 </body>
 </form>
+{% if messages %}
+<div class="tela-sucesso bg-success text-center d-flex text-white vw-100 vh-100" id="tela-sucesso">
+    <h2 class="my-auto mx-auto"><b>Seu pedido foi feito com sucesso!</b></h2>
+</div>
+<script>
+    $(document).ready(function(){
+        setTimeout(() => {document.getElementById('tela-sucesso').style = "transition: opacity 1s ease-out; opacity: 0;"}, 3000);
+        setTimeout(() => {document.getElementById('tela-sucesso').style = "display: none !important;"}, 4000);
+    });
+</script>
+{% endif %}
 <script src="{% static 'js/tela_venda.js' %}"></script>

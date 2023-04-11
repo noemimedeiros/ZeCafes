@@ -12,7 +12,9 @@
                 <h1>Zé Cafés</h1>
                 {% if messages %}
                     {% for message in messages %}
-                        <section class="alert alert-danger mb-0" role="alert">{{ message }} </section>
+                        {% if message.tags == "error" %}
+                            <section class="alert alert-danger mb-0" role="alert">{{ message }} </section>
+                        {% endif %}
                     {% endfor %}
                 {% endif %}
                 <div class="form-floating">

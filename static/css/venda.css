@@ -437,10 +437,24 @@
     padding-bottom: 2%;
 }
 
-.main-venda .modal .pagamento button img{
+.main-venda .modal .pagamento .cartao img{
     width: 120px;
+}
+
+.main-venda .modal .pagamento .opcoes-cartao button{
+    background-color: #c4ccce;
+    color: white;
+}
+
+.main-venda .modal .pagamento .opcoes-cartao button:hover{
+    background-color: #a7b6b9;
 }
 
 .main-venda .modal .pagamento .pix img{
     width: 80px;
+}
+
+.tela-sucesso{
+    z-index: 50;
+    position: absolute;
 }

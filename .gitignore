@@ -133,3 +133,4 @@ db copy.sqlite3
 #.editorconfig
 .vscode
 zecafes/settings.py
+settings.py

@@ -31,5 +31,5 @@ class tela_login(FormView):
             if not login.tipo:
                 return HttpResponseRedirect(reverse('barista:tela_atendimento'))
         if self.mensagem != None:
-            messages.info(request, self.mensagem)
+            messages.error(request, self.mensagem)
         return render(request, "pages/login.html")

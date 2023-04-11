@@ -15,6 +15,7 @@ from utils.views import ZecafesView
 from utils.forms import PedidosForm
 from utils.utils import random_generator
 from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib import messages
 
 # Create your views here.
 class tela_venda(ListView):
@@ -38,6 +39,7 @@ class tela_venda(ListView):
         form.valor = float(self.request.POST.get('valor'))
         form.tempo_gasto = datetime.now().strftime("%H:%M:%S")
         form.save()
+        messages.success(self.request, 'Sucesso')
         return HttpResponseRedirect(reverse('barista:tela_venda'))
     
 class tela_atendimento_pedidos(ZecafesView, ListView):
