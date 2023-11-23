@@ -16,7 +16,7 @@ class MetodoPagamento(models.Model):
 class Pedidos(models.Model):
     numero = models.CharField(verbose_name="Número", max_length=8, unique=True, primary_key=True, null=False, blank=False)
     metodo_pagamento = models.ForeignKey(MetodoPagamento, verbose_name="Método de Pagamento", on_delete=models.CASCADE, null=False, blank=False, db_column="metodo_pagamento")
-    descricao = models.CharField(verbose_name="Descrição", max_length=4000, null=False, blank=False)
+    descricao = models.TextField(verbose_name="Descrição", null=False, blank=False)
     observacoes = models.CharField(verbose_name="Observações", max_length=40, null=True, blank=True)
     valor = models.DecimalField(verbose_name="Valor", null=False, blank=False, max_digits=8, decimal_places=2)
     data_pedido = models.DateField(verbose_name="Data do Pedido", null=False, blank=False, default=timezone.now)
