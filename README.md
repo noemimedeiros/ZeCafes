@@ -9,7 +9,7 @@
         
 #### 2. Crie uma virtualenv, ative e instale as dependências
 
-        $ python -m env venv
+        $ python -m venv env
         $ .env/Scripts/activate
         $ pip install -r requirements.txt
         
